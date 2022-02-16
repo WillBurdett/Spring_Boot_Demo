@@ -85,6 +85,14 @@ public class CarDataAccessService implements CarDAO{
 
     @Override
     public int updateCar(Integer carId, Car update) {
+        var sql = """
+                UPDATE car SET regnumber = ?, brand = ?, price = ? WHERE id = ?; 
+                """;
+        int result = jdbcTemplate.update(sql, update.getRegNumber(), update.getBrand().toString(), update.getPrice(), carId);
+
+        if (result == 1){
+            return 1;
+        }
         return 0;
     }
 }

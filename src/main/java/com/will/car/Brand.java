@@ -4,5 +4,12 @@ public enum Brand {
     TESLA,
     FORD,
     MINI,
-    HONDA
+    HONDA,
+    BMW,
+    SAAB,
+    HYUNDAI,
+    SKODA,
+    MAZDA,
+    VAUXHALL,
+    PEUGEOT
 }
