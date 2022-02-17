@@ -50,6 +50,9 @@ public class CarService {
     }
 
     public void deleteCar(Integer id) {
+        if (carDAO.selectCarById(id) == null){
+            throw new CarNotFoundException("Car with id " + id + " does not exist.");
+        }
         int result = carDAO.deleteCar(id);
         if (result != 1){
             throw new RuntimeException("Car could not be deleted.");

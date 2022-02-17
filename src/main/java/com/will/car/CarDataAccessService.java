@@ -31,7 +31,8 @@ public class CarDataAccessService implements CarDAO{
         return jdbcTemplate.query(sql, new CarRowMapper()); // takes the sql and row mapper
     }
 
-//         // THIS IS WHAT THE ABOVE CLASS ACHIEVES USING A ROW MAPPER INSTEAD
+//    //-------------------------------------------------------------------------------
+//    // THIS IS WHAT THE ABOVE CLASS ACHIEVES USING A DIFFERENT ROW MAPPER INSTEAD
 
 //    public List<Car> selectAllCarsAlt() {
 //        var sql = """
@@ -40,12 +41,13 @@ public class CarDataAccessService implements CarDAO{
 //                """;
 //       return jdbcTemplate.query(sql, (rs, i) -> {
 //           return new Car(rs.getInt("id"),
-//                   rs.getString("regNumber"),
+//                   rs.getString("regnumber"),
 //                   Brand.valueOf(rs.getString("brand")),
 //                   rs.getDouble("price")
 //           );
 //       });
 //    }
+//    //-------------------------------------------------------------------------------
 
     @Override
     public Car selectCarById(Integer id) {
@@ -71,7 +73,7 @@ public class CarDataAccessService implements CarDAO{
                 """;
         return jdbcTemplate.update( // returns the number of rows effected
                 insertSql,
-                car.getRegNumber(), car.getBrand().toString(), car.getPrice());
+                car.getRegNumber(), car.getBrand().name(), car.getPrice());
     }
 
     @Override
@@ -88,7 +90,7 @@ public class CarDataAccessService implements CarDAO{
         var sql = """
                 UPDATE car SET regnumber = ?, brand = ?, price = ? WHERE id = ?; 
                 """;
-        int result = jdbcTemplate.update(sql, update.getRegNumber(), update.getBrand().toString(), update.getPrice(), carId);
+        int result = jdbcTemplate.update(sql, update.getRegNumber(), update.getBrand().name(), update.getPrice(), carId);
 
         if (result == 1){
             return 1;

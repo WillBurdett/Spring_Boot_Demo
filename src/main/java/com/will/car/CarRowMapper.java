@@ -11,7 +11,7 @@ public class CarRowMapper implements RowMapper<Car> {
     public Car mapRow(ResultSet resultset, int i) throws SQLException{
         return new Car(
                 resultset.getInt("id"),
-                resultset.getString("regNumber"),
+                resultset.getString("regnumber"),
                 Brand.valueOf(resultset.getString("brand")),
                 resultset.getDouble("price")
         );
