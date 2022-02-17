@@ -28,12 +28,12 @@ public class CarService {
     public void registerNewCar(Car car){
         // business logic, check if reg number is valid and not taken
         if(car.getPrice() <= 0){
-            throw new IllegalStateException("Car price cannot be 0 or less");
+            throw new InvalidRequestException("Car price cannot be 0 or less");
         }
         int result = carDAO.insertCar(car);
 
         if (result != 1){
-            throw new IllegalArgumentException("Could not save car");
+            throw new InvalidRequestException("Could not save car");
         }
     }
 
@@ -44,7 +44,7 @@ public class CarService {
     public Car getCarById(Integer id) {
         Car car = carDAO.selectCarById(id);
         if (car == null){
-            throw new NullPointerException("No car with that ID found.");
+            throw new CarNotFoundException("No car with that ID found.");
         }
         return car;
     }
